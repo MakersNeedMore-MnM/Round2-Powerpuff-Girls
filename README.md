@@ -62,25 +62,6 @@ bun run build
 bun run preview
 ```
 
-### Environment variables
-
-Copy `.env.example` to `.env` and fill in:
-
-| Variable | Purpose |
-|---|---|
-| `GEMINI_API_KEY` | For Gemini API calls (AI Studio injects this automatically from the Secrets panel in that environment) |
-| `APP_URL` | Self-referential URL used for links/callbacks (auto-injected by AI Studio's Cloud Run deployment) |
-
-## Limitations / known gaps
-
-Worth knowing before relying on this for anything real:
-
-- **No real authentication.** The doctor role is explicitly reachable with "no login required" (see `handleSimulateDoctorScan` in `App.tsx`), and role switching lives in client state.
-- **No backend or database.** "Sessions" persist via `localStorage` (`consultready_sessions_store_v1`) on the same device/browser, not a server — this cannot broker access between an actual patient's phone and an actual doctor's device.
-- **No encryption or access control on record contents** beyond what the UI enforces; anyone with the session ID and local access to the store can, in principle, see the data.
-- **Smart suggestions are keyword rules, not clinical judgment** — the "AI" framing in the product description is aspirational relative to what's implemented.
-- Demo/seed data (a default patient and a pre-expiring demo session) ships baked into the store initialization, which is convenient for showing the flow but means first-run state isn't empty.
-
 ## License
 
 Not specified in the project — add one if you intend to distribute this.
