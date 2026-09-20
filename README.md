@@ -1,38 +1,29 @@
-
 # ConsultReady
-Cross-platform healthcare app for patient-controlled, time-limited medical record sharing during doctor consultations — access is granted and revoked via a secure QR code, not a permanent login.
 
-## Live Demo Link
+Cross-platform healthcare app for patient-controlled, time-limited medical record sharing during doctor consultations. Access is granted and revoked through a secure, expiring QR code — never a permanent login.
+
+## Problem Statement
+
+When a patient sees a new doctor or specialist, relevant medical history (lab reports, imaging, prescriptions, past diagnoses) is usually scattered across paper files, WhatsApp chats, or apps the doctor has no access to. Patients either overshare an entire medical history or arrive without the one report the doctor actually needs, and there's no clean way to grant a doctor temporary, scoped access to records for a single consultation and have that access automatically expire afterward.
+
+ConsultReady solves this by letting patients curate exactly which records apply to a specific visit, share them via a single QR scan, and have that access expire on its own — no permanent data exposure, no manual revocation required.
+
+## Key Features
+
+- **Patient-controlled sharing** – patients choose exactly which records to share for each consultation, not their entire history
+- **Smart record suggestions** – a rule-based engine recommends relevant records based on the chosen specialty and reason for visit, with a clinical rationale for each suggestion
+- **QR-based, time-limited sessions** – a session QR code (downloadable) is generated per consultation, with a live countdown until it automatically expires
+- **No PHI in the QR code** – the code encodes only an opaque session ID (e.g. `CONSULT_SESSION_8F72A91C`); no patient data ever lives in the code itself
+- **Doctor-side scan & request flow** – doctors scan the QR (live camera scanner) or enter a session ID manually, then request access, which the patient must explicitly approve or deny
+- **Session status tracking** – sessions move through `pending`, `requested`, `active`, `expired`, `revoked`, and `denied` states, so access is always scoped and time-boxed
+- **Record management** – patients can upload, browse, and view full record details (lab reports, imaging, prescriptions, hospital records, vitals/history) in-app
+- **One-click demo mode** – seeds a complete sample flow (patient → suggestions → QR → doctor scan) for quickly demoing the product end to end
+- **Responsive device preview** – toggle between mobile, tablet, and responsive views to review the UI at different breakpoints
+
+## Live Demo
 https://consult-ready.vercel.app/
 
-## What it does
-ConsultReady lets a **patient** pick which medical records are relevant to an upcoming consultation, generate a temporary QR code for that session, and share it with a **doctor**, who scans the code to request and view only those records — with no standing access once the session ends.
-
-### Patient flow
-- **Welcome** – choose to start a new consultation or view records
-- **My Records** – browse uploaded records (lab reports, imaging, prescriptions, hospital records, vitals/history), upload new ones, view details in a record viewer modal
-- **Create Consultation** – enter specialty and reason for visit
-- **Smart Suggestions** – rule-based engine recommends which records are relevant to the chosen specialty/reason, with a clinical rationale for each suggestion
-- **Review & Approve** – confirm the final set of records to share
-- **Consultation QR** – a session QR code is generated (downloadable) with a live countdown until it expires
-- **Incoming Access Request** – approve or deny a doctor's request to view the shared records
-- **Profile** – patient details
-
-### Doctor flow
-- **Scan QR** – scan a patient's session QR via device camera (jsQR-based live scanner) or enter a session ID manually
-- **Verify Access** – confirm the scanned session
-- **Request Access** – send an access request to the patient
-- **Waiting for Approval** – poll for the patient's decision
-- **Patient Records** – view the approved records for that session only
-
-### Session & security model
-- QR codes encode only an opaque session ID (e.g. `CONSULT_SESSION_8F72A91C`) — no patient data or PHI is ever embedded in the code itself
-- Sessions carry a status (`pending`, `requested`, `active`, `expired`, `revoked`, `denied`) and an expiry timestamp; a countdown timer enforces time-limited access
-- Access is scoped per-session to only the records the patient selected
-
-The app also includes a one-click **demo mode** that seeds a full sample flow (patient → suggestions → QR → doctor scan) for quickly demoing the product end to end, plus a device-preview toggle (mobile / tablet / responsive) for reviewing the UI at different breakpoints.
-
-## Tech stack
+## Tech Stack
 
 - **React 19** + **TypeScript**, built with **Vite**
 - **Zustand** for state management (`authStore`, `sessionStore`, `recordsStore`, `consultationStore`)
@@ -40,7 +31,31 @@ The app also includes a one-click **demo mode** that seeds a full sample flow (p
 - **lucide-react** for icons, **motion** for animation, **canvas-confetti** for success moments
 - **qrcode** for QR generation, **jsqr** for camera-based QR scanning
 
-## Project structure
+## How to Run
+
+```bash
+# install dependencies
+npm install   # or bun install (a bun.lock is included)
+
+# start the dev server (http://localhost:3000)
+npm run dev
+
+# type-check
+npm run lint
+
+# production build
+npm run build
+npm run preview
+```
+
+Camera-based QR scanning requires the browser to have camera permission; a manual session-ID entry fallback is available on the doctor scan screen.
+
+### How to use it
+
+1. **As a patient**: start on the Welcome screen → select a specialty and reason for visit → review the smart-suggested records → approve the final set → a QR code is generated with a countdown timer.
+2. **As a doctor**: switch roles (or use the built-in "simulate doctor scan" demo shortcut) → scan the patient's QR, or enter the session ID manually → request access → once the patient approves, view the shared records only, only until the session expires.
+
+## Project Structure
 
 ```
 src/
@@ -61,23 +76,13 @@ src/
 └── types/                       # Shared TypeScript types
 ```
 
-## Getting started
+## Team Members
 
-```bash
-# install dependencies
-npm install   # or bun install (a bun.lock is included)
-
-# start the dev server (http://localhost:3000)
-npm run dev
-
-# type-check
-npm run lint
-
-# production build
-npm run build
-npm run preview
-```
-
-Camera-based QR scanning requires the browser to have camera permission; a manual session-ID entry fallback is available in the doctor scan screen.
+| Name |
+|------|
+|Anjali Bisht |
+|Akansha Bisht |
+|Mukti Pandit |
+|Aashi|
 
 
