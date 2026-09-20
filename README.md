@@ -77,7 +77,3 @@ npm run preview
 ```
 
 Camera-based QR scanning requires the browser to have camera permission; a manual session-ID entry fallback is available in the doctor scan screen.
-
-## Notes
-
-This is a front-end prototype: records, users, and sessions are held in-memory via Zustand (seeded from `src/constants/index.ts`) rather than persisted to a backend or database, and the "smart suggestions" engine is a deterministic keyword/rule matcher rather than a live AI call.
