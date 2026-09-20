@@ -19,8 +19,7 @@ Both roles are simulated in the same app — there's a "switch to Scanner Portal
 - **Tailwind CSS 4** for styling
 - **qrcode** (generation) + **jsqr** (camera scanning) for the QR flow
 - **motion** for animation, **canvas-confetti** for success states, **lucide-react** for icons
-- A minimal **Express** dependency is present but there's no server code in `src/` — routing and logic are entirely client-side
-
+  
 ## Project structure
 
 ```
