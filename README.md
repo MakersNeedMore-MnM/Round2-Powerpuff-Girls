@@ -1,5 +1,7 @@
-# ConsultReady
+## Live Demo Link
+https://consult-ready.vercel.app/
 
+# ConsultReady
 Cross-platform healthcare app for patient-controlled, time-limited medical record sharing during doctor consultations — access is granted and revoked via a secure QR code, not a permanent login.
 
 ## What it does
@@ -78,5 +80,4 @@ npm run preview
 
 Camera-based QR scanning requires the browser to have camera permission; a manual session-ID entry fallback is available in the doctor scan screen.
 
-## Live Demo Link
-https://consult-ready.vercel.app/
+
