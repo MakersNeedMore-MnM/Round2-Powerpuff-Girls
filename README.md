@@ -19,7 +19,6 @@ Both roles are simulated in the same app — there's a "switch to Scanner Portal
 - **Tailwind CSS 4** for styling
 - **qrcode** (generation) + **jsqr** (camera scanning) for the QR flow
 - **motion** for animation, **canvas-confetti** for success states, **lucide-react** for icons
-- **@google/genai** — Gemini API dependency is present (per `metadata.json`'s `MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API`), but the record-suggestion logic actually shipped is a hand-written rules engine, not an LLM call
 - A minimal **Express** dependency is present but there's no server code in `src/` — routing and logic are entirely client-side
 
 ## Project structure
