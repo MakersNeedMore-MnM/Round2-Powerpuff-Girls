@@ -2,8 +2,6 @@
 
 A cross-platform healthcare front-end for **patient-controlled, time-limited medical record sharing via QR code**. A patient picks which records to share for a specific consultation, generates a QR code carrying an opaque session ID, and a doctor scans it to request time-boxed access.
 
-> **Status: prototype / demo.** This is a client-side React app built for AI Studio (Gemini). There is no real backend, no authentication, and no encryption of record contents — see [Limitations](#limitations--known-gaps) before treating this as anything beyond a UX proof of concept.
-
 ## How it works
 
 1. **Patient** selects a specialty and reason for visit → the app runs a deterministic, keyword-based rules engine (`smartSuggestions.ts`) to suggest which existing records are clinically relevant.
